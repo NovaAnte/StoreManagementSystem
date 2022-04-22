@@ -32,4 +32,24 @@ public class CustomerRest {
         }
         return Response.ok(customer).build();
     }
+
+    @Path("{id}")
+    @GET
+    public Response findCustomer(@PathParam("id") Long id) {
+        Customer foundCustomer;
+        try {
+            foundCustomer = customerService.findCustomer(id);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "Could not find customer with that ID.")).build());
+        }
+        return Response.ok(foundCustomer).build();
+    }
+
+    @Path("update/{id}")
+    @PATCH
+    public Response updateCustomer(@PathParam("id") Long id, Customer customer){
+        try {
+            customer = customerService.updateCustomer(id, customer);
+        }
+    }
 }

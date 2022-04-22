@@ -16,4 +16,9 @@ public class CustomerService {
     public void addCustomer(Customer customer){
         entityManager.persist(customer);
     }
+
+    public Customer findCustomer(Long id) {
+        Customer foundCustomer = entityManager.find(Customer.class, id);
+        return foundCustomer;
+    }
 }
