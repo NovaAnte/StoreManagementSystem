@@ -49,15 +49,19 @@ public class CustomerRest {
     @PATCH
     public Response updateCustomer(@PathParam("id") Long id, Customer customer){
         try {
+            notFoundError(id);
             customer = customerService.updateCustomer(id, customer);
+        } catch (Exception e){
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity(new JsonFormatter(Response.Status.BAD_REQUEST.getStatusCode(), "Failed to update customer.")).build());
         }
+        return Response.ok(customer).build();
     }
 
     @Produces(MediaType.APPLICATION_JSON)
     private void notFoundError(Long id) {
 
         if (customerService.findCustomer(id) == null) {
-            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonResponse(404, "Not Found", "There is no student with the id: " + id)).build());
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "There is no student with the id: " + id)).build());
         }
     }
 }

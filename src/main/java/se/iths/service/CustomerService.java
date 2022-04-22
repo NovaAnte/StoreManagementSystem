@@ -21,4 +21,11 @@ public class CustomerService {
         Customer foundCustomer = entityManager.find(Customer.class, id);
         return foundCustomer;
     }
+
+    public Customer updateCustomer(Long id, Customer customer) {
+        Customer foundCustomer = entityManager.find(Customer.class, id);
+        foundCustomer.setFirstName(customer.getFirstName());
+        foundCustomer.setLastName(customer.getLastName());
+        return foundCustomer;
+    }
 }
