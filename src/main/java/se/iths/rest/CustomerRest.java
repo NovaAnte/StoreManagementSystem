@@ -52,4 +52,12 @@ public class CustomerRest {
             customer = customerService.updateCustomer(id, customer);
         }
     }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    private void notFoundError(Long id) {
+
+        if (customerService.findCustomer(id) == null) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonResponse(404, "Not Found", "There is no student with the id: " + id)).build());
+        }
+    }
 }

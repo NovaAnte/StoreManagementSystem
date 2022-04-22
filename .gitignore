@@ -27,7 +27,7 @@
 # JetBrains IDEs
 .idea/
 *.iml
-
+.idea/workspace.xml
 # Eclipse
 .project
 .classpath

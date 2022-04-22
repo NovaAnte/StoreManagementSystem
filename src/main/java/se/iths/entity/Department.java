@@ -14,5 +14,24 @@ public class Department {
 
     private String departmentName;
 
+    public Department() {
+    }
+
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     // link to items, employee
 }
