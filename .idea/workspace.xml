@@ -9,7 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="254303a2-3fcb-47b5-8722-171a92bd395d" name="Changes" comment="Initial commit (again...)" />
+    <list default="true" id="254303a2-3fcb-47b5-8722-171a92bd395d" name="Changes" comment="Initial commit (again...)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/Department.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/se/iths/entity/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/se/iths/entity/Store.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650617756470</updated>
       <workItem from="1650617758395" duration="314000" />
-      <workItem from="1650618313794" duration="1152000" />
+      <workItem from="1650618313794" duration="2036000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1650618389097</created>
