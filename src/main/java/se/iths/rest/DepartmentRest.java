@@ -50,9 +50,24 @@ public class DepartmentRest {
         return Response.ok(departmentService.getAllDepartments()).build();
     }
 
-    @Produces(MediaType.APPLICATION_JSON)
-    private void notFoundError(Long id) {
+    @Path("{id}")
+    @PATCH
+    public Response updateDepartmentName(@PathParam("id") Long id, Department department ) {
+        notFoundError(id);
+        Department updateDepartment = departmentService.updateDepartment(id, department.getDepartmentName());
+        return Response.ok(updateDepartment).build();
+    }
 
+    @Path("{id}")
+    @DELETE
+    public Response deleteDepartment(@PathParam("id") Long id) {
+        notFoundError(id);
+        departmentService.deleteDepartment(id);
+        return Response.ok().entity(new JsonFormatter(200, "Successfully deleted department with ID: " + id)).build();
+    }
+
+
+    private void notFoundError(Long id) {
         if (departmentService.findDepartmentById(id) == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(404, "ID: " + id + " not found")).build());
         }

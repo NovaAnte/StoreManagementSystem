@@ -24,4 +24,14 @@ public class DepartmentService {
     public List<Department> getAllDepartments() {
        return entityManager.createQuery("SELECT d from Department d", Department.class).getResultList();
     }
+
+    public Department updateDepartment(Long id, String departmentName) {
+       Department department = entityManager.find(Department.class, id);
+       department.setDepartmentName(departmentName);
+        return department;
+}
+
+    public void deleteDepartment(Long id) {
+        entityManager.remove(entityManager.find(Department.class, id));
+    }
 }
