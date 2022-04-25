@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -12,7 +13,9 @@ public class Employee {
     private Long id;
 
     @Size(min = 2)
-    private String name;
+    private String firstName;
+    @Size(min = 2)
+    private String lastName;
 
     @Size(min = 2)
     private String role;
@@ -20,19 +23,25 @@ public class Employee {
     @Column(unique = true)
     private String email;
 
-    @NotEmpty
-    private double Salary;
+    @DecimalMin("10.0")
+    private double salary;
+
+    @ManyToOne
+    private Department department;
+
+    public Employee() {
+    }
+
+    public Employee(String firstName, String lastName, String role, String email, double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.email = email;
+        this.salary = salary;
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRole() {
@@ -52,11 +61,27 @@ public class Employee {
     }
 
     public double getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(double salary) {
-        Salary = salary;
+        this.salary = salary;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     // link to department

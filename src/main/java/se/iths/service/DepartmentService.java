@@ -12,24 +12,25 @@ public class DepartmentService {
 
     @PersistenceContext
     EntityManager entityManager;
+
     public void addDepartment(Department department) {
         entityManager.persist(department);
     }
 
-    public Department findDepartmentById(Long id) {
-       Department department = entityManager.find(Department.class, id);
+    public Department getDepartmentById(Long id) {
+        Department department = entityManager.find(Department.class, id);
         return department;
     }
 
     public List<Department> getAllDepartments() {
-       return entityManager.createQuery("SELECT d from Department d", Department.class).getResultList();
+        return entityManager.createQuery("SELECT d from Department d", Department.class).getResultList();
     }
 
     public Department updateDepartment(Long id, String departmentName) {
-       Department department = entityManager.find(Department.class, id);
-       department.setDepartmentName(departmentName);
+        Department department = entityManager.find(Department.class, id);
+        department.setDepartmentName(departmentName);
         return department;
-}
+    }
 
     public void deleteDepartment(Long id) {
         entityManager.remove(entityManager.find(Department.class, id));

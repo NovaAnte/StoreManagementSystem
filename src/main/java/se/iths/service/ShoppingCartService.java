@@ -25,18 +25,17 @@ public class ShoppingCartService {
         return entityManager.find(Item.class, id);
     }
 
-    public ShoppingCart linkItemToShoppingCart(Long cartId, Long itemId) {
+    public void linkItemToShoppingCart(Long cartId, Long itemId) {
         ShoppingCart foundCart = entityManager.find(ShoppingCart.class, cartId);
         Item foundItem = entityManager.find(Item.class, itemId);
 
         entityManager.persist(foundCart.getItemList().add(foundItem));
-        return foundCart;
     }
 
     public void unlinkItemFromShoppingCart(Long cartId, Long itemId) {
         ShoppingCart foundCart = entityManager.find(ShoppingCart.class, cartId);
         Item foundItem = entityManager.find(Item.class, itemId);
 
-        // in progress.
+        entityManager.persist(foundCart.getItemList().remove(foundItem));
     }
 }

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("department")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -37,17 +38,18 @@ public class DepartmentRest {
     @GET
     public Response getDepartmentById(@PathParam("id") Long id) {
         notFoundError(id);
-        Department department = departmentService.findDepartmentById(id);
+        Department department = departmentService.getDepartmentById(id);
         return Response.ok(department).build();
     }
 
     @Path("")
     @GET
     public Response getAllDepartments() {
-        if(departmentService.getAllDepartments().isEmpty()) {
+        List<Department> departments = departmentService.getAllDepartments();
+        if(departments.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).entity(new JsonFormatter(204, "There are no departments added yet.")).build();
         }
-        return Response.ok(departmentService.getAllDepartments()).build();
+        return Response.ok(departments).build();
     }
 
     @Path("{id}")
@@ -68,7 +70,7 @@ public class DepartmentRest {
 
 
     private void notFoundError(Long id) {
-        if (departmentService.findDepartmentById(id) == null) {
+        if (departmentService.getDepartmentById(id) == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(404, "ID: " + id + " not found")).build());
         }
     }
