@@ -49,4 +49,8 @@ public class EmployeeService {
         }
         return employee;
     }
+
+    public void deleteDepartment(Long id) {
+        entityManager.remove(getEmployeeById(id));
+    }
 }

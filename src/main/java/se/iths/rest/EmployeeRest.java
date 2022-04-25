@@ -55,6 +55,14 @@ public class EmployeeRest {
         return Response.ok(employee).build();
     }
 
+    @Path("{id}")
+    @DELETE
+    public Response deleteDepartment(@PathParam("id") Long id) {
+        notFoundError(id);
+        employeeService.deleteDepartment(id);
+        return Response.ok().entity(new JsonFormatter(200, "Successfully deleted employee with ID: " + id)).build();
+    }
+
     private void notFoundError(Long id) {
         if (employeeService.getEmployeeById(id) == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(404, "ID: " + id + " not found")).build());

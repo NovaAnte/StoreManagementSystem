@@ -2,6 +2,7 @@ package se.iths.rest;
 
 
 import se.iths.entity.Department;
+import se.iths.entity.Employee;
 import se.iths.service.DepartmentService;
 import se.iths.utils.JsonFormatter;
 
@@ -66,6 +67,18 @@ public class DepartmentRest {
         notFoundError(id);
         departmentService.deleteDepartment(id);
         return Response.ok().entity(new JsonFormatter(200, "Successfully deleted department with ID: " + id)).build();
+    }
+
+    @Path("addemployee/{id}")
+    @PATCH
+    public Response addEmployee(@PathParam("id")Long id, @QueryParam("email")String email) {
+        notFoundError(id);
+        Employee connectedEmployee = departmentService.addEmployee(id, email);
+        if(connectedEmployee.getEmail() == null) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter
+                    (Response.Status.NOT_FOUND.getStatusCode(), "Could not find an employee with the email: " + email)).build());
+        }
+        return Response.ok(connectedEmployee).build();
     }
 
 

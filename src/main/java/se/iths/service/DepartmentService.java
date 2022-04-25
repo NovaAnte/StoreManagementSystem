@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Department;
+import se.iths.entity.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,8 +19,7 @@ public class DepartmentService {
     }
 
     public Department getDepartmentById(Long id) {
-        Department department = entityManager.find(Department.class, id);
-        return department;
+        return entityManager.find(Department.class, id);
     }
 
     public List<Department> getAllDepartments() {
@@ -27,12 +27,21 @@ public class DepartmentService {
     }
 
     public Department updateDepartment(Long id, String departmentName) {
-        Department department = entityManager.find(Department.class, id);
+        Department department = getDepartmentById(id);
         department.setDepartmentName(departmentName);
         return department;
     }
 
     public void deleteDepartment(Long id) {
         entityManager.remove(entityManager.find(Department.class, id));
+    }
+
+    public Employee addEmployee(Long id, String email) {
+
+        Department department = getDepartmentById(id);
+        Employee employee = (Employee) entityManager.createQuery("Select e from Employee e where e.email = :email")
+                .setParameter("email", email).getSingleResult();
+        department.addEmployee(employee);
+        return employee;
     }
 }

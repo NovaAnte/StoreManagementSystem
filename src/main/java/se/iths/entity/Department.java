@@ -34,5 +34,18 @@ public class Department {
         this.departmentName = departmentName;
     }
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+        employee.setDepartment(this);
+    }
+
+    public void removeEmployee(Employee employee) {
+        employeeList.remove(employee);
+    }
+
     // link to items, employee
 }
