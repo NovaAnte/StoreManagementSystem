@@ -35,6 +35,17 @@ public class SampleData {
         ShoppingCart shoppingCart2 = new ShoppingCart();
 
         Store store = new Store("ITHS Maxi Lindhagen");
+
+        entityManager.persist(customer);
+        entityManager.persist(customer2);
+        entityManager.persist(department);
+        entityManager.persist(department2);
+        entityManager.persist(employee);
+        entityManager.persist(employee2);
+        entityManager.persist(item);
+        entityManager.persist(item2);
+        entityManager.persist(item3);
+        entityManager.persist(item4);
     }
 
 }
