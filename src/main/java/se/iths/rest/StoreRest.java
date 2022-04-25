@@ -45,11 +45,11 @@ public class StoreRest {
     @Path("")
     @GET
     public Response getAllStores(){
-        List<Store> foundStores;
-        if(storeService.getAllStores().isEmpty()) {
+        List<Store> foundStores = storeService.getAllStores();
+        if(foundStores.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).entity(new JsonFormatter(204, "There are no stores added yet.")).build();
         }
-        return Response.ok(storeService.getAllStores()).build();
+        return Response.ok(foundStores).build();
     }
 
     @Path("{id}")
