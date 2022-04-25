@@ -1,9 +1,6 @@
 package se.iths.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -23,6 +20,10 @@ public class Customer {
     private String lastName;
     // add set/list for shoppingCart
 
+    @OneToOne (cascade = CascadeType.PERSIST)
+    private ShoppingCart shoppingCart;
+
+
     public Customer(){
 
     }
@@ -30,6 +31,16 @@ public class Customer {
     public Customer(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public Long getId() {

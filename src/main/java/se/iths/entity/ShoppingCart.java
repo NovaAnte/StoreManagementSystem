@@ -1,5 +1,6 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class ShoppingCart {
     @OneToMany
     private List<Item> itemList;
 
+    @OneToOne
+    private Customer customer;
+
+
     public ShoppingCart(){
 
     }
@@ -24,6 +29,14 @@ public class ShoppingCart {
 
     public void removeItem(Item item){
         itemList.remove(item);
+    }
+    @JsonbTransient
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getId() {

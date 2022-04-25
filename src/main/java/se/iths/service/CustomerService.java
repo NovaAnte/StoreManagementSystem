@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Customer;
+import se.iths.entity.ShoppingCart;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -15,8 +16,13 @@ public class CustomerService {
     EntityManager entityManager;
 
     public void addCustomer(Customer customer){
+        ShoppingCart shoppingCart = new ShoppingCart();
+        customer.setShoppingCart(shoppingCart);
+        shoppingCart.setCustomer(customer);
+        entityManager.persist(shoppingCart);
         entityManager.persist(customer);
     }
+
 
     public Customer findCustomer(Long id) {
         Customer foundCustomer = entityManager.find(Customer.class, id);
