@@ -40,8 +40,12 @@ public class EmployeeService {
             updateEmp.setEmail(employee.getEmail());
         }
 
-        if (employee.getName() != null) {
-            updateEmp.setName(employee.getName());
+        if (employee.getFirstName() != null) {
+            updateEmp.setFirstName(employee.getFirstName());
+        }
+
+        if (employee.getFirstName() != null) {
+            updateEmp.setLastName(employee.getLastName());
         }
         return employee;
     }

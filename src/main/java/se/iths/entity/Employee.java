@@ -13,7 +13,9 @@ public class Employee {
     private Long id;
 
     @Size(min = 2)
-    private String name;
+    private String firstName;
+    @Size(min = 2)
+    private String lastName;
 
     @Size(min = 2)
     private String role;
@@ -30,8 +32,9 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String role, String email, double salary) {
-        this.name = name;
+    public Employee(String firstName, String lastName, String role, String email, double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
         this.email = email;
         this.salary = salary;
@@ -39,14 +42,6 @@ public class Employee {
 
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRole() {
@@ -71,6 +66,22 @@ public class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     // link to department
