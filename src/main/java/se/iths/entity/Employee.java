@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -20,8 +21,21 @@ public class Employee {
     @Column(unique = true)
     private String email;
 
-    @NotEmpty
-    private double Salary;
+    @DecimalMin("10.0")
+    private double salary;
+
+    @ManyToOne
+    private Department department;
+
+    public Employee() {
+    }
+
+    public Employee(String name, String role, String email, double salary) {
+        this.name = name;
+        this.role = role;
+        this.email = email;
+        this.salary = salary;
+    }
 
     public Long getId() {
         return id;
@@ -52,11 +66,11 @@ public class Employee {
     }
 
     public double getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(double salary) {
-        Salary = salary;
+        this.salary = salary;
     }
 
     // link to department
