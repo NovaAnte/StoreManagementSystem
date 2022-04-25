@@ -18,6 +18,14 @@ public class ShoppingCart {
 
     }
 
+    public void addItem(Item item){
+        itemList.add(item);
+    }
+
+    public void removeItem(Item item){
+        itemList.remove(item);
+    }
+
     public Long getId() {
         return id;
     }

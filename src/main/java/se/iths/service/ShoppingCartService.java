@@ -29,13 +29,13 @@ public class ShoppingCartService {
         ShoppingCart foundCart = entityManager.find(ShoppingCart.class, cartId);
         Item foundItem = entityManager.find(Item.class, itemId);
 
-        entityManager.persist(foundCart.getItemList().add(foundItem));
+        foundCart.addItem(foundItem);
     }
 
     public void unlinkItemFromShoppingCart(Long cartId, Long itemId) {
         ShoppingCart foundCart = entityManager.find(ShoppingCart.class, cartId);
         Item foundItem = entityManager.find(Item.class, itemId);
 
-        entityManager.persist(foundCart.getItemList().remove(foundItem));
+        foundCart.removeItem(foundItem);
     }
 }
