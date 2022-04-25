@@ -1,5 +1,6 @@
 package se.iths.rest;
 
+import se.iths.entity.Department;
 import se.iths.entity.Store;
 import se.iths.service.StoreService;
 import se.iths.utils.JsonFormatter;
@@ -73,6 +74,46 @@ public class StoreRest {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "No customer with ID " + id + " was found.")).build());
         }
         return Response.ok(new JsonFormatter(Response.Status.OK.getStatusCode(), "Deleted customer with ID "  + id)).build();
+    }
+
+    @Path("link")
+    @PATCH
+    public Response linkStoreToDepartment(@QueryParam("storeId") Long storeId, @QueryParam("departmentId") Long departmentId){
+        Store foundStore = storeService.getStoreById(storeId);
+        Department foundDepartment = storeService.getDepartmentById(departmentId);
+        try {
+            storeService.linkDepartment(storeId, departmentId);
+        } catch (Exception e){
+            String exceptionHelper = null;
+            if (foundStore == null){
+                exceptionHelper = "Store not found.";
+            }
+            if (foundDepartment == null){
+                exceptionHelper = "Department not found.";
+            }
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), exceptionHelper)).build());
+        }
+        return Response.ok().entity(new JsonFormatter(Response.Status.OK.getStatusCode(), "Department with ID " + departmentId + " linked to store with ID " + storeId)).build();
+    }
+
+    @Path("unlink")
+    @PATCH
+    public Response unlinkStoreFromDepartment(@QueryParam("storeId") Long storeId, @QueryParam("departmentId") Long departmentId){
+        Store foundStore = storeService.getStoreById(storeId);
+        Department foundDepartment = storeService.getDepartmentById(departmentId);
+        try {
+            storeService.unlinkDepartment(storeId, departmentId);
+        } catch (Exception e){
+            String exceptionHelper = null;
+            if (foundStore == null){
+                exceptionHelper = "Store not found";
+            }
+            if (foundDepartment == null){
+                exceptionHelper = "Department not found";
+            }
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), exceptionHelper)).build());
+        }
+        return Response.ok().entity(new JsonFormatter(Response.Status.OK.getStatusCode(), "Department with ID " + departmentId + " unlinked from store with ID " + storeId)).build();
     }
 
     public void notFoundError(Long id) {
