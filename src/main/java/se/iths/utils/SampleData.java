@@ -46,6 +46,9 @@ public class SampleData {
         entityManager.persist(item2);
         entityManager.persist(item3);
         entityManager.persist(item4);
+        entityManager.persist(shoppingCart);
+        entityManager.persist(shoppingCart2);
+        entityManager.persist(store);
     }
 
 }
