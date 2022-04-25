@@ -1,6 +1,7 @@
 package se.iths.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -13,7 +14,7 @@ public class Item {
     @NotEmpty
     private String name;
 
-    @NotEmpty
+    @DecimalMin("1")
     private double price;
 
     @ManyToOne
