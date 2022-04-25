@@ -45,8 +45,6 @@ public class ShoppingCartRest {
         return Response.ok(foundCart).build();
     }
 
-    // add methods for linking item to cart
-
     @Path("link")
     @PATCH
     public Response linkItemToShoppingCart(@QueryParam("cartId") Long cartId, @QueryParam("itemId") Long itemId) {
@@ -86,7 +84,7 @@ public class ShoppingCartRest {
             }
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), exceptionHelper)).build());
         }
-        return Response.ok(new JsonFormatter(Response.Status.OK.getStatusCode(), "Item with ID " + foundItem.getId() + " added to cart with ID " + foundCart.getId())).build();
+        return Response.ok(new JsonFormatter(Response.Status.OK.getStatusCode(), "Item with ID " + foundItem.getId() + " removed from cart with ID " + foundCart.getId())).build();
     }
 
 
