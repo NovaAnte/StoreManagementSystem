@@ -41,6 +41,15 @@ public class DepartmentRest {
         return Response.ok(department).build();
     }
 
+    @Path("")
+    @GET
+    public Response getAllDepartments() {
+        if(departmentService.getAllDepartments().isEmpty()) {
+            return Response.status(Response.Status.NO_CONTENT).entity(new JsonFormatter(204, "There are no departments added yet.")).build();
+        }
+        return Response.ok(departmentService.getAllDepartments()).build();
+    }
+
     @Produces(MediaType.APPLICATION_JSON)
     private void notFoundError(Long id) {
 

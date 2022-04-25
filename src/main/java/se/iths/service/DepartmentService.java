@@ -5,6 +5,7 @@ import se.iths.entity.Department;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public class DepartmentService {
@@ -18,5 +19,9 @@ public class DepartmentService {
     public Department findDepartmentById(Long id) {
        Department department = entityManager.find(Department.class, id);
         return department;
+    }
+
+    public List<Department> getAllDepartments() {
+       return entityManager.createQuery("SELECT d from Department d", Department.class).getResultList();
     }
 }
