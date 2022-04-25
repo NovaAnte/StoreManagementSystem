@@ -38,31 +38,22 @@ public class CustomerRest {
     @Path("{id}")
     @GET
     public Response findCustomer(@PathParam("id") Long id) {
-        Customer foundCustomer;
-        try {
-            foundCustomer = customerService.findCustomer(id);
-        } catch (Exception e) {
-            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "Could not find customer with that ID.")).build());
-        }
+        notFoundError(id);
+        Customer foundCustomer = customerService.findCustomer(id);
         return Response.ok(foundCustomer).build();
     }
 
-    @Path("findall")
+    @Path("")
     @GET
     public Response findAllCustomers(){ // får no body istället för exception i insomnia
-        List<Customer> foundCustomers;
-        try {
-            foundCustomers = customerService.findAllCustomers();
-        } catch (Exception e){
-            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "Could not find any customers.")).build());
-        }
-        if (foundCustomers.isEmpty()){
-            throw new WebApplicationException(Response.status(Response.Status.NO_CONTENT).entity(new JsonFormatter(Response.Status.NO_CONTENT.getStatusCode(), "Could not find any customers.")).build());
+        List<Customer> foundCustomers = customerService.findAllCustomers();
+        if(foundCustomers.isEmpty()){
+            return Response.status(Response.Status.NO_CONTENT).entity(new JsonFormatter(Response.Status.NO_CONTENT.getStatusCode(), "There are no customers yet.")).build();
         }
         return Response.ok(foundCustomers).build();
     }
 
-    @Path("update/{id}")
+    @Path("{id}")
     @PATCH
     public Response updateCustomer(@PathParam("id") Long id, Customer customer){
         try {
@@ -74,7 +65,7 @@ public class CustomerRest {
         return Response.ok(customer).build();
     }
 
-    @Path("delete/{id}")
+    @Path("{id}")
     @DELETE
     public Response deleteCustomer(@PathParam("id") Long id){
         try{
@@ -88,7 +79,7 @@ public class CustomerRest {
     public void notFoundError(Long id) {
 
         if (customerService.findCustomer(id) == null) {
-            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "There is no student with the id: " + id)).build());
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "There is no customer with the id: " + id)).build());
         }
     }
 }

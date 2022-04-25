@@ -1,9 +1,7 @@
 package se.iths.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ShoppingCart {
@@ -11,5 +9,29 @@ public class ShoppingCart {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
 
+    private double totalPrice;
+
+    @OneToMany
+    private List<Item> itemList;
+
+    public ShoppingCart(){
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
 
 }
