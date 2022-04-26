@@ -1,5 +1,6 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,11 +16,24 @@ public class Department {
     @OneToMany
     private List<Employee> employeeList;
 
+    @ManyToOne
+    private Store store;
+
+
     public Department() {
     }
 
     public Department(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    @JsonbTransient
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public Long getId() {

@@ -1,9 +1,8 @@
 package se.iths.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Store {
@@ -13,10 +12,23 @@ public class Store {
 
     private String storeName;
 
-    public Store (){
+
+    @OneToMany
+    private List<Department> departmentList;
+
+
+    public Store() {
     }
 
-    public Store (String storeName){
+    public List<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
+
+    public Store(String storeName) {
         this.storeName = storeName;
     }
 
