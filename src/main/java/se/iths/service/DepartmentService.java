@@ -36,12 +36,20 @@ public class DepartmentService {
         entityManager.remove(entityManager.find(Department.class, id));
     }
 
-    public Employee addEmployee(Long id, String email) {
+    public Employee linkEmployeeToDepartment(Long id, String email) {
 
         Department department = getDepartmentById(id);
         Employee employee = (Employee) entityManager.createQuery("Select e from Employee e where e.email = :email")
                 .setParameter("email", email).getSingleResult();
         department.addEmployee(employee);
+        return employee;
+    }
+
+    public Employee unlinkEmployeeToDepartment(Long id, String email) {
+        Department department = getDepartmentById(id);
+        Employee employee = (Employee) entityManager.createQuery("Select e from Employee e where e.email = :email")
+                .setParameter("email", email).getSingleResult();
+        department.removeEmployee(employee);
         return employee;
     }
 }

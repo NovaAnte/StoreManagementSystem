@@ -86,6 +86,4 @@ public class ShoppingCartRest {
         }
         return Response.ok(new JsonFormatter(Response.Status.OK.getStatusCode(), "Item with ID " + foundItem.getId() + " removed from cart with ID " + foundCart.getId())).build();
     }
-
-
 }

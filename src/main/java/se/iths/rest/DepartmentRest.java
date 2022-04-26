@@ -69,11 +69,23 @@ public class DepartmentRest {
         return Response.ok().entity(new JsonFormatter(200, "Successfully deleted department with ID: " + id)).build();
     }
 
-    @Path("addemployee/{id}")
+    @Path("linkemployee/{id}")
     @PATCH
-    public Response addEmployee(@PathParam("id")Long id, @QueryParam("email")String email) {
+    public Response linkEmployeeToDepartment(@PathParam("id")Long id, @QueryParam("email")String email) {
         notFoundError(id);
-        Employee connectedEmployee = departmentService.addEmployee(id, email);
+        Employee connectedEmployee = departmentService.linkEmployeeToDepartment(id, email);
+        if(connectedEmployee.getEmail() == null) {
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter
+                    (Response.Status.NOT_FOUND.getStatusCode(), "Could not find an employee with the email: " + email)).build());
+        }
+        return Response.ok(connectedEmployee).build();
+    }
+
+    @Path("unlinkemployee/{id}")
+    @PATCH
+    public Response unlinkEmployeeToDepartment(@PathParam("id")Long id, @QueryParam("email")String email) {
+        notFoundError(id);
+        Employee connectedEmployee = departmentService.unlinkEmployeeToDepartment(id, email);
         if(connectedEmployee.getEmail() == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter
                     (Response.Status.NOT_FOUND.getStatusCode(), "Could not find an employee with the email: " + email)).build());
