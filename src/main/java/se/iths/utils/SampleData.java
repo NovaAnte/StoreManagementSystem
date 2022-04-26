@@ -36,8 +36,8 @@ public class SampleData {
 
         Store store = new Store("ITHS Maxi Lindhagen");
 
-     //   entityManager.persist(customer);
-     //   entityManager.persist(customer2);
+        entityManager.persist(customer);
+        entityManager.persist(customer2);
         entityManager.persist(department);
         entityManager.persist(department2);
         entityManager.persist(employee);

@@ -3,6 +3,8 @@ package se.iths.entity;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Item {
@@ -20,8 +22,6 @@ public class Item {
     @ManyToOne
     private Department department;
 
-    @ManyToOne
-    private ShoppingCart shoppingCart;
 
     public Item() {
     }
@@ -61,13 +61,5 @@ public class Item {
 
     public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 }

@@ -2,7 +2,9 @@ package se.iths.entity;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ShoppingCart {
@@ -12,8 +14,8 @@ public class ShoppingCart {
 
     private double totalPrice;
 
-    @OneToMany
-    private List<Item> itemList;
+    @ManyToMany
+    Set<Item> items = new HashSet<>();
 
     @OneToOne
     private Customer customer;
@@ -24,12 +26,13 @@ public class ShoppingCart {
     }
 
     public void addItem(Item item){
-        itemList.add(item);
+        items.add(item);
     }
 
     public void removeItem(Item item){
-        itemList.remove(item);
+        items.remove(item);
     }
+
     @JsonbTransient
     public Customer getCustomer() {
         return customer;
@@ -51,8 +54,7 @@ public class ShoppingCart {
         this.totalPrice = totalPrice;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public Set<Item> getItems() {
+        return items;
     }
-
 }
