@@ -13,13 +13,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user1").password("user1").roles("USER")
+                .withUser("user1").password("{noop}password").roles("USER")
                 .and()
                 .withUser("admin").roles("ADMIN").password("{noop}password");
     }
-/*
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/api/v1/store/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/employee/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/shoppingcart/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/department/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/item/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/customer/**").hasRole("ADMIN").and().formLogin();
+    }
+
+    /*
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -31,8 +42,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/home", true)
                 .failureUrl("/auth/login?error=true")
                 .and()
-                .logout().logoutSuccessUrl("/auth/login");
-    }
-    */
+                .logout().logoutSuccessUrl("/auth/login");*/
 
 }
