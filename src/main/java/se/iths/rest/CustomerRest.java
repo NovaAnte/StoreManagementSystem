@@ -4,9 +4,7 @@ import se.iths.entity.Customer;
 import se.iths.service.CustomerService;
 import se.iths.utils.JsonFormatter;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.json.Json;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -77,7 +75,6 @@ public class CustomerRest {
     }
 
     public void notFoundError(Long id) {
-
         if (customerService.findCustomer(id) == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND).entity(new JsonFormatter(Response.Status.NOT_FOUND.getStatusCode(), "There is no customer with the id: " + id)).build());
         }

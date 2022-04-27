@@ -3,8 +3,6 @@ package se.iths.entity;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Item {

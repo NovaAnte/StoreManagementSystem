@@ -1,6 +1,5 @@
 package se.iths.rest;
 
-import se.iths.entity.Customer;
 import se.iths.entity.Item;
 import se.iths.entity.ShoppingCart;
 import se.iths.service.ShoppingCartService;
