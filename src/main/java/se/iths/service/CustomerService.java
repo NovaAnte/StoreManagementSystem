@@ -3,7 +3,6 @@ package se.iths.service;
 import se.iths.entity.Customer;
 import se.iths.entity.ShoppingCart;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
